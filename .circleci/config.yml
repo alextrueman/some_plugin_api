@@ -47,9 +47,9 @@ jobs:
             bundle exec rake db:create
 
       - run:
-          name: Parallel RSpec
+          name: RSpec
           command: |
-            DISABLE_SPRING=true bin/rails test
+            bundle exec rspec
 
       # Save artifacts
       - store_test_results:
