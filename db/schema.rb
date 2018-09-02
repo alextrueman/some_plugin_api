@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_134353) do
+ActiveRecord::Schema.define(version: 2018_09_02_150446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "analyzed_sites", force: :cascade do |t|
+    t.string "url"
+    t.string "hexdigest"
+    t.text "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status"
+  end
+
+  create_table "user_analyzed_sites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "analyzed_site_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "browser_name"
