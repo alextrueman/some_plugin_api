@@ -9,6 +9,6 @@ class User < ApplicationRecord
   private
 
   def generate_access_token
-    self.auth_token = SecureRandom.hex
+    self.auth_token = SecureRandom.hex unless auth_token
   end
 end

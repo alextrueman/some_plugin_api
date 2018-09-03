@@ -5,6 +5,6 @@ class AnalyzerAlgorithmService
 
   def call
     sleep(60)
-    @analyzed_site.source.length.even? ? @analyzed_site.approve : @analyzed_site.reject
+    @analyzed_site.source.length.even? ? @analyzed_site.approve! : @analyzed_site.reject!
   end
 end

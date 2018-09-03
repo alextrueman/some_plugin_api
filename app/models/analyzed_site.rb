@@ -1,7 +1,7 @@
 class AnalyzedSite < ApplicationRecord
   include AASM
 
-  has_many: :user_analyzed_sites
+  has_many :user_analyzed_sites
 
   aasm :column => 'status' do
      state :queued, initial: true

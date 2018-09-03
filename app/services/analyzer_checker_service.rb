@@ -5,11 +5,11 @@ class AnalyzerCheckerService
   end
 
   def call
-    if valid_analyzed_site?
-      analyzed_site.status
-    else
-      start_analyze(params, analyzed_site)
-    end
+    start_analyze until valid_analyzed_site?
+
+    UserAnalyzedSite.find_or_create_by(user: @current_user, analyzed_site: analyzed_site)
+
+    analyzed_site
   end
 
   private
@@ -27,6 +27,6 @@ class AnalyzerCheckerService
   end
 
   def start_analyze
-    AnalyzerPreparerService.new(params, analyzed_site, hexdigest).()
+    AnalyzerPreparerService.new(@params, analyzed_site, hexdigest).()
   end
 end
