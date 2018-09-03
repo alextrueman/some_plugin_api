@@ -1,16 +1,19 @@
 class Api::V1::AnalyzedSitesController < Api::ApplicationController
   def index
-    render json: { analyzed_sites: current_user.analyzed_sites }, status: 200
+    render json: current_user.analyzed_sites,
+      each_serialize: AnalyzedSiteSerializer,
+      status: 200
   end
 
   def create
     render json: AnalyzerCheckerService.new(analyzer_params, current_user).(),
+      serializer: AnalyzedSiteSerializer,
       status: 200
   end
 
   def show
     analyzed_site = AnalyzedSite.find(params[:id])
-    render json: analyzed_site, status: 200
+    render json: analyzed_site, serializer: AnalyzedSiteSerializer, status: 200
   end
 
   private
