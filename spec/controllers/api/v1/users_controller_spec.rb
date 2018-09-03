@@ -11,7 +11,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       it 'should create User with API-token' do
         expect{perform_action}.to change{User.count}.from(0).to(1)
 
-        expect(response.status).to eq 200
         expect(response_body['auth_token']).not_to be_nil
       end
     end

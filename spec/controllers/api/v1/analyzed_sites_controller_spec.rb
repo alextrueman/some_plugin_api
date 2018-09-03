@@ -19,7 +19,6 @@ RSpec.describe Api::V1::AnalyzedSitesController, type: :controller do
 
         expect(AnalyzedSite.count).to eq 1
         expect(response_body['url']).to eq params[:site_params][:url]
-        expect(response_body['source']).to eq params[:site_params][:source]
         expect(response_body['status']).to eq 'queued'
       end
     end
@@ -36,7 +35,6 @@ RSpec.describe Api::V1::AnalyzedSitesController, type: :controller do
         perform_action
 
         expect(response_body['url']).to eq analyzed_site.url
-        expect(response_body['source']).to eq analyzed_site.source
         expect(response_body['status']).to eq 'approved'
       end
     end
@@ -51,8 +49,7 @@ RSpec.describe Api::V1::AnalyzedSitesController, type: :controller do
 
       it 'should return analyzed sites for user' do
         perform_action
-
-        expect(response_body['analyzed_sites'].map { |e| e['id'] }).to match_array analyzed_sites_ids
+        expect(response_body.map { |e| e['id'] }).to match_array analyzed_sites_ids
       end
     end
   end
