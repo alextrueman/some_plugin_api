@@ -1,7 +1,8 @@
 FactoryBot.define do
+  source = Faker::HarryPotter.book
   factory :analyzed_site do
-    url "MyString"
-    hexdigest "MyString"
-    source "MyText"
+    url Faker::Internet.url
+    hexdigest Digest::SHA1.hexdigest(source)
+    source source
   end
 end
